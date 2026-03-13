@@ -8,7 +8,9 @@ import {
   StyleSheet,
   SafeAreaView,
   StatusBar,
+  TouchableOpacity,
 } from "react-native";
+import { useRouter } from "expo-router";
 
 // ─── Notícias do painel de elevador ───────────────────────────────────────
 const NOTICIAS = [
@@ -64,6 +66,8 @@ const NOTICIAS = [
 ];
 
 export default function AtualizacaoScreen() {
+  const router = useRouter();
+
   // ─── Estado do tema (claro/escuro) ────────────────────────────────────
   const [darkMode, setDarkMode] = useState(true); // começa no escuro como na imagem
 
@@ -97,6 +101,9 @@ export default function AtualizacaoScreen() {
 
       {/* ── HEADER: toggle de modo escuro ─────────────────────────────── */}
       <View style={styles.headerSwitch}>
+        <TouchableOpacity onPress={() => router.push('/perfil')} style={styles.perfilBtn}>
+          <Text style={styles.perfilBtnTexto}>👤 Perfil</Text>
+        </TouchableOpacity>
         <Text style={[styles.switchLabel, { color: cores.textoSecundario }]}>
           {darkMode ? "🌙" : "☀️"}  Modo {darkMode ? "Escuro" : "Claro"}
         </Text>
@@ -188,6 +195,18 @@ const styles = StyleSheet.create({
     paddingTop: 12,
     paddingBottom: 4,
     gap: 8,
+  },
+  perfilBtn: {
+    marginRight: "auto",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 8,
+    backgroundColor: "#1c1c1e",
+  },
+  perfilBtnTexto: {
+    color: "#4da6ff",
+    fontSize: 14,
+    fontWeight: "600",
   },
   switchLabel: {
     fontSize: 14,
